@@ -28,6 +28,7 @@
 #
 
 prefix=/usr/local
+folder=gitflow
 
 # files that need mode 755
 EXEC_FILES=git-flow
@@ -48,11 +49,15 @@ all:
 
 install:
 	@test -f gitflow-shFlags || (echo "Run 'git submodule init && git submodule update' first." ; exit 1 )
-	install -d -m 0755 $(prefix)/bin
-	install -m 0755 $(EXEC_FILES) $(prefix)/bin
-	install -m 0644 $(SCRIPT_FILES) $(prefix)/bin
+	install -d -m 0755 $(prefix)/$(folder)
+	install -m 0755 $(EXEC_FILES) $(prefix)/$(folder)
+	install -m 0644 $(SCRIPT_FILES) $(prefix)/$(folder)
+	cd $(prefix)/bin
+	ln -s $(prefix)/$(folder)/$(EXEC_FILES)
 
 uninstall:
-	test -d $(prefix)/bin && \
+	test -d $(prefix)/$(folder) && \
 	cd $(prefix)/bin && \
 	rm -f $(EXEC_FILES) $(SCRIPT_FILES)
+	cd ..
+	rm -f $(folder)
