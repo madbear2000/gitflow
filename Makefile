@@ -46,6 +46,7 @@ SCRIPT_FILES+=gitflow-shFlags
 all:
 	@echo "usage: make install"
 	@echo "       make uninstall"
+	@echo "       make shortcut-bash to install some shortcut functions"
 
 install:
 	@test -f gitflow-shFlags || (echo "Run 'git submodule init && git submodule update' first." ; exit 1 )
@@ -64,3 +65,7 @@ uninstall:
 	rm -f $(EXEC_FILES) $(SCRIPT_FILES)
 	cd .. && \
 	rm -rf $(folder)
+
+shortcut-bash:
+	cp bash-git-flow-functions ~/.git-flow-functions
+	cat gitflow-bash-function >> ~/.bashrc
