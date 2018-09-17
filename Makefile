@@ -26,7 +26,9 @@
 # those of the authors and should not be interpreted as representing official
 # policies, either expressed or implied, of Vincent Driessen.
 #
+
 prefix=/usr/local
+folder=gitflow
 
 # files that need mode 755
 EXEC_FILES=git-flow
@@ -44,14 +46,28 @@ SCRIPT_FILES+=gitflow-shFlags
 all:
 	@echo "usage: make install"
 	@echo "       make uninstall"
+	@echo "       make shortcut-bash to install some shortcut functions for bash"
+	@echo "       make shortcut-zsh to install some shortcut functions for zsh"
 
 install:
 	@test -f gitflow-shFlags || (echo "Run 'git submodule init && git submodule update' first." ; exit 1 )
-	install -d -m 0755 $(prefix)/bin
-	install -m 0755 $(EXEC_FILES) $(prefix)/bin
-	install -m 0644 $(SCRIPT_FILES) $(prefix)/bin
+
+	install -d -m 0755 $(prefix)/$(folder)
+	install -m 0755 $(EXEC_FILES) $(prefix)/$(folder)
+	install -m 0644 $(SCRIPT_FILES) $(prefix)/$(folder)
+
+	rm $(prefix)/bin/$(EXEC_FILES)
+	ln -s $(prefix)/$(folder)/$(EXEC_FILES) $(prefix)/bin/$(EXEC_FILES)
 
 uninstall:
-	test -d $(prefix)/bin && \
-	cd $(prefix)/bin && \
-	rm -f $(EXEC_FILES) $(SCRIPT_FILES)
+	test -d $(prefix)/$(folder) && \
+	rm $(prefix)/bin/$(EXEC_FILES)
+	rm -rf $(prefix)/$(folder)
+
+shortcut-bash:
+	cp bash-git-flow-functions ~/.git-flow-functions
+	cat gitflow-bash-function >> ~/.bashrc
+
+shortcut-zsh:
+	cp bash-git-flow-functions ~/.git-flow-functions
+	cat gitflow-bash-function >> ~/.zshrc

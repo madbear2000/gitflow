@@ -1,0 +1,5 @@
+
+# Sourcing function shortcuts for git flow
+if [ -f ~/.git-flow-functions ]; then
+    . ~/.git-flow-functions
+fi
