@@ -47,7 +47,13 @@ fi
 
 # The sed expression here replaces all backslashes by forward slashes.
 # This helps our Windows users, while not bothering our Unix users.
-export GITFLOW_DIR=$(dirname "$(readlink -f "$0") | sed -e 's,\\,/,g')")
+
+
+baseDIR=`readlink -f "$0"`
+
+export GITFLOW_DIR=$(dirname $baseDIR | sed -e 's,\\,/,g')
+
+# export GITFLOW_DIR=$(dirname) |  readlink -f | sed -e 's,\\,/,g'
 
 usage() {
 	echo "usage: git flow <subcommand>"

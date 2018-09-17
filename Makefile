@@ -56,16 +56,13 @@ install:
 	install -m 0755 $(EXEC_FILES) $(prefix)/$(folder)
 	install -m 0644 $(SCRIPT_FILES) $(prefix)/$(folder)
 
+	rm $(prefix)/bin/$(EXEC_FILES)
 	ln -s $(prefix)/$(folder)/$(EXEC_FILES) $(prefix)/bin/$(EXEC_FILES)
 
 uninstall:
 	test -d $(prefix)/$(folder) && \
-	cd $(prefix)/bin && \
-	rm -f $(EXEC_FILES) $(SCRIPT_FILES)
-	cd $(prefix)/$(folder) && \
-	rm -f $(EXEC_FILES) $(SCRIPT_FILES)
-	cd .. && \
-	rm -rf $(folder)
+	rm $(prefix)/bin/$(EXEC_FILES)
+	rm -rf $(prefix)/$(folder)
 
 shortcut-bash:
 	cp bash-git-flow-functions ~/.git-flow-functions
