@@ -181,7 +181,11 @@ cmd_start() {
 	echo "Follow-up actions:"
 	echo "- Bump the version number now!"
 	echo "- Start committing last-minute fixes in preparing your release"
-	echo "- When done, run:"
+	echo "- When done and want to push to remote repository, run:"
+	echo
+	echo "     git flow release publish '$VERSION'"
+	echo
+	echo "- When release complete, run to merge into develop and master:"
 	echo
 	echo "     git flow release finish '$VERSION'"
 	echo

@@ -24,6 +24,19 @@ Installing git-flow
 -------------------
 See the Wiki for up-to-date [Installation Instructions](https://github.com/nvie/gitflow/wiki/Installation).
 
+To install the cmd shortcuts for release and hotfixs. 
+This will add the functions git-release and git-hotfix
+
+For bash use the following:
+```
+    make shortcut-bash
+```
+
+For zsh use the following:
+```
+    make shortcut-zsh
+```
+
 
 Integration with your shell
 ---------------------------
